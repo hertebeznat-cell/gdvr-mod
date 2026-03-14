@@ -40,3 +40,4 @@ jobs:
           bindings-ref: main
           combine: true
           target: ${{ matrix.config.target }}
+          ccache-variant: ''
