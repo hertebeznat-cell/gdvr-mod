@@ -3,7 +3,7 @@
 #include <Geode/Geode.hpp>
 
 // OpenXR & OpenGL Platform headers
-#ifdef GEODE_IS_WIN32
+#ifdef GEODE_IS_WINDOWS
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #define XR_USE_PLATFORM_WIN32 1
@@ -74,3 +74,4 @@ private:
 
     bool m_isRunning = false;
 };
+

@@ -36,7 +36,7 @@ bool OpenXRApp::createInstance() {
     createInfo.applicationInfo.apiVersion = XR_CURRENT_API_VERSION;
 
     std::vector<const char*> extensions;
-#ifdef GEODE_IS_WIN32
+#ifdef GEODE_IS_WINDOWS
     extensions.push_back(XR_KHR_OPENGL_ENABLE_EXTENSION_NAME);
 #elif defined(GEODE_IS_ANDROID)
     extensions.push_back(XR_KHR_OPENGL_ES_ENABLE_EXTENSION_NAME);
@@ -65,7 +65,7 @@ bool OpenXRApp::initializeSystem() {
 }
 
 bool OpenXRApp::initializeSession() {
-#ifdef GEODE_IS_WIN32
+#ifdef GEODE_IS_WINDOWS
     // Setup OpenGL Graphics Binding for Win32
     PFN_xrGetOpenGLGraphicsRequirementsKHR pfnGetOpenGLGraphicsRequirementsKHR = nullptr;
     xrGetInstanceProcAddr(m_instance, "xrGetOpenGLGraphicsRequirementsKHR", (PFN_xrVoidFunction*)&pfnGetOpenGLGraphicsRequirementsKHR);
@@ -113,7 +113,7 @@ bool OpenXRApp::initializeSession() {
 bool OpenXRApp::createSwapchain() {
     // We only need one swapchain for a single 2D quad overlay
     int64_t format = 0;
-#ifdef GEODE_IS_WIN32
+#ifdef GEODE_IS_WINDOWS
     format = GL_SRGB8_ALPHA8; // Typical OpenGL SRGB format
 #elif defined(GEODE_IS_ANDROID)
     format = GL_SRGB8_ALPHA8; // Typical GLES SRGB format
@@ -138,7 +138,7 @@ bool OpenXRApp::createSwapchain() {
     uint32_t imageCount = 0;
     xrEnumerateSwapchainImages(m_swapchain.handle, 0, &imageCount, nullptr);
 
-#ifdef GEODE_IS_WIN32
+#ifdef GEODE_IS_WINDOWS
     m_swapchain.images.resize(imageCount, {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR});
     xrEnumerateSwapchainImages(m_swapchain.handle, imageCount, &imageCount, (XrSwapchainImageBaseHeader*)m_swapchain.images.data());
 #elif defined(GEODE_IS_ANDROID)
@@ -334,3 +334,4 @@ void OpenXRApp::renderFrame(unsigned int sourceTexture) {
 
     xrEndFrame(m_session, &endInfo);
 }
+
