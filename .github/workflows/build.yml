@@ -33,6 +33,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Download Geode Binaries Manually
+        if: matrix.config.target != 'Win64'
+        run: |
+          mkdir -p ${{ github.workspace }}/geode-sdk-clone/bin/5.3.0/android32
+          mkdir -p ${{ github.workspace }}/geode-sdk-clone/bin/5.3.0/android64
+          curl -L https://github.com/geode-sdk/geode/releases/download/v5.3.0/geode-v5.3.0-android32.zip -o android32.zip
+          curl -L https://github.com/geode-sdk/geode/releases/download/v5.3.0/geode-v5.3.0-android64.zip -o android64.zip
+          unzip -o android32.zip -d ${{ github.workspace }}/geode-sdk-clone/bin/5.3.0/android32
+          unzip -o android64.zip -d ${{ github.workspace }}/geode-sdk-clone/bin/5.3.0/android64
+          rm android32.zip android64.zip
+
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
