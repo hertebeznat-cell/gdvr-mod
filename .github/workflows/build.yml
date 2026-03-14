@@ -33,10 +33,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Geode CLI and SDK Binaries
-        if: matrix.config.target != 'Win64'
-        uses: geode-sdk/cli/.github/actions/setup@main
-
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
