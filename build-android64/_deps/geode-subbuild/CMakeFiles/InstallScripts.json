@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"D:/gdvr/build-android64/_deps/geode-subbuild/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
