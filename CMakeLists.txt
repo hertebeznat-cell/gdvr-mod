@@ -2,18 +2,7 @@ cmake_minimum_required(VERSION 3.16.0 FATAL_ERROR)
 
 project(gdvr VERSION 1.0.0)
 
-set(GEODE_FETCH_URL "https://github.com/geode-sdk/geode.git" CACHE STRING "The URL to fetch Geode from")
-set(GEODE_FETCH_TAG "main" CACHE STRING "The branch or tag to fetch Geode from")
-
-include(FetchContent)
-
-# Fetch Geode
-FetchContent_Declare(
-    Geode
-    GIT_REPOSITORY ${GEODE_FETCH_URL}
-    GIT_TAG ${GEODE_FETCH_TAG}
-)
-FetchContent_MakeAvailable(Geode)
+find_package(Geode REQUIRED)
 
 # Fetch OpenXR
 FetchContent_Declare(
